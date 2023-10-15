@@ -1,0 +1,13 @@
+sequenceDiagram
+    participant Käyttäjä as User
+    participant Selain as Browser
+    participant Palvelin as Server
+
+    User->>Browser: Kirjoittaa muistiinpanon ja painaa "Tallenna"
+    Note right of Browser: Muodostaa POST-pyynnön muistiinpanodatalla
+    Browser->>Server: POST /new_note_spa { "content": "Uusi muistiinpano", "date": "2023-10-15" }
+    activate Server
+    Note over Server: Käsittelee pyynnön ja luo uuden muistiinpanon
+    Server-->>Browser: 201 Created { "id": 1, "content": "Uusi muistiinpano", "date": "2023-10-15" }
+    deactivate Server
+    Note right of Browser: JavaScript käsittelee vastauksen ja päivittää näkymän uudella muistiinpanolla
